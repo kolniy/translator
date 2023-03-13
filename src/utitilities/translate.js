@@ -10,8 +10,6 @@ const translate = new Translate({
 async function translateText(text, target) {
   // Run request
   const [tranlation] = await translate.translate(text, target);
-  console.log(`Text: ${text}`);
-  console.log(`Translation: ${tranlation}`);
   return tranlation;
 }
 

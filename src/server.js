@@ -1,7 +1,8 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import translateText from "./utitilities/translate.js";
+
+import translateRoute from "./routers/translate.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -17,12 +18,15 @@ app.set("views", viewsPath);
 
 // setup static directory to serve
 app.use(express.static(publicDirectory));
+app.use(express.json({ extended: false }));
 
 app.get("/", (req, res) => {
   res.render("index", {
     name: "Some username...",
   });
 });
+
+app.use("/api/v1/translate", translateRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on Port ${PORT}`);
